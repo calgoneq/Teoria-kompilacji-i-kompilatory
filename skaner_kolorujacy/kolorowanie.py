@@ -1,20 +1,4 @@
-"""
-Kolorowanie składni dla języka MiniScript.
-Program wczytuje plik źródłowy, tokenizuje go za pomocą automatu stanów
-i generuje plik HTML z pokolorowaną składnią, zachowując układ tekstu.
-
-Użycie:
-    python3 kolorowanie.py <plik_wejściowy> <plik_wyjściowy.html>
-
-Autor: Student TKIK
-"""
-
 import sys
-
-
-# ============================================================
-#  Definicje tokenów i kolorów
-# ============================================================
 
 SLOWA_KLUCZOWE = {
     "fun", "let", "if", "else", "while", "for",
@@ -23,29 +7,22 @@ SLOWA_KLUCZOWE = {
 }
 
 KOLORY_CSS = {
-    "KEYWORD":   "color: #c678dd; font-weight: bold;",   # fioletowy
-    "IDENT":     "color: #e06c75;",                       # czerwony
-    "INT":       "color: #d19a66;",                       # pomarańczowy
-    "FLOAT":     "color: #d19a66;",                       # pomarańczowy
-    "STRING":    "color: #98c379;",                       # zielony
-    "COMMENT":   "color: #5c6370; font-style: italic;",   # szary kursywą
-    "OPERATOR":  "color: #56b6c2;",                       # cyjan
-    "ARROW":     "color: #56b6c2;",                       # cyjan
-    "DELIMITER": "color: #abb2bf;",                       # jasny szary
-    "ERROR":     "color: #ff0000; background: #3e1111;",  # czerwony z tłem
+    "KEYWORD":   "color: #c678dd; font-weight: bold;",
+    "IDENT":     "color: #e06c75;",
+    "INT":       "color: #d19a66;",
+    "FLOAT":     "color: #d19a66;",
+    "STRING":    "color: #98c379;",
+    "COMMENT":   "color: #5c6370; font-style: italic;",
+    "OPERATOR":  "color: #56b6c2;",
+    "ARROW":     "color: #56b6c2;",
+    "DELIMITER": "color: #abb2bf;",
+    "ERROR":     "color: #ff0000; background: #3e1111;",
 }
 
 OPERATORY_POJEDYNCZE = set("+-*%")
 OGRANICZNIKI = set("(){}[],;:")
 
-
-# ============================================================
-#  Klasa Token
-# ============================================================
-
 class Token:
-    """Przechowuje informacje o jednym tokenie."""
-
     __slots__ = ("typ", "tresc")
 
     def __init__(self, typ: str, tresc: str):
@@ -55,19 +32,7 @@ class Token:
     def __repr__(self):
         return f"Token({self.typ}, {self.tresc!r})"
 
-
-# ============================================================
-#  Automat skanujący (state machine)
-# ============================================================
-
 class AutomatSkanera:
-    """
-    Analizator leksykalny oparty na automacie stanów.
-    Przetwarza tekst źródłowy na listę tokenów,
-    zachowując białe znaki w celu odtworzenia układu.
-    """
-
-    # Stany automatu
     STAN_START = "START"
     STAN_IDENTYFIKATOR = "IDENTYFIKATOR"
     STAN_LICZBA = "LICZBA"
@@ -81,37 +46,28 @@ class AutomatSkanera:
         self.dlug = len(kod_zrodlowy)
         self.poz = 0
 
-    # --- metody pomocnicze ---
-
     def _obecny(self) -> str | None:
-        """Zwraca bieżący znak bez przesuwania wskaźnika."""
         if self.poz < self.dlug:
             return self.zrodlo[self.poz]
         return None
 
     def _nastepny(self) -> str | None:
-        """Podgląda następny znak (poz + 1)."""
         idx = self.poz + 1
         if idx < self.dlug:
             return self.zrodlo[idx]
         return None
 
     def _konsumuj(self) -> str:
-        """Pobiera bieżący znak i przesuwa wskaźnik."""
         zn = self.zrodlo[self.poz]
         self.poz += 1
         return zn
 
-    # --- główna pętla automatu ---
-
     def skanuj(self) -> list[Token]:
-        """Przetwarza cały tekst i zwraca listę tokenów."""
         tokeny: list[Token] = []
 
         while self.poz < self.dlug:
             zn = self._obecny()
 
-            # ── Białe znaki (zachowujemy) ──
             if zn in (" ", "\t", "\n", "\r"):
                 bufor = self._konsumuj()
                 while self._obecny() in (" ", "\t", "\n", "\r"):
@@ -119,7 +75,6 @@ class AutomatSkanera:
                 tokeny.append(Token("WHITESPACE", bufor))
                 continue
 
-            # ── Komentarz liniowy (#) ──
             if zn == "#":
                 bufor = self._konsumuj()
                 while self._obecny() is not None and self._obecny() != "\n":
@@ -127,7 +82,6 @@ class AutomatSkanera:
                 tokeny.append(Token("COMMENT", bufor))
                 continue
 
-            # ── Możliwy komentarz blokowy lub operator / ──
             if zn == "/":
                 if self._nastepny() == "*":
                     tokeny.append(self._skanuj_komentarz_blokowy())
@@ -136,22 +90,18 @@ class AutomatSkanera:
                     tokeny.append(Token("OPERATOR", "/"))
                 continue
 
-            # ── Identyfikator / słowo kluczowe ──
             if zn.isalpha() or zn == "_":
                 tokeny.append(self._skanuj_identyfikator())
                 continue
 
-            # ── Liczba ──
             if zn.isdigit():
                 tokeny.append(self._skanuj_liczbe())
                 continue
 
-            # ── Łańcuch znaków ──
             if zn == '"':
                 tokeny.append(self._skanuj_lancuch())
                 continue
 
-            # ── Strzałka -> lub minus ──
             if zn == "-":
                 if self._nastepny() == ">":
                     self._konsumuj()
@@ -162,33 +112,26 @@ class AutomatSkanera:
                     tokeny.append(Token("OPERATOR", "-"))
                 continue
 
-            # ── Operatory dwuznakowe (==, !=, <=, >=) ──
             if zn in ("=", "!", "<", ">"):
                 tokeny.append(self._skanuj_operator_porownania())
                 continue
 
-            # ── Operatory pojedyncze ──
             if zn in OPERATORY_POJEDYNCZE:
                 self._konsumuj()
                 tokeny.append(Token("OPERATOR", zn))
                 continue
 
-            # ── Ograniczniki ──
             if zn in OGRANICZNIKI:
                 self._konsumuj()
                 tokeny.append(Token("DELIMITER", zn))
                 continue
 
-            # ── Nierozpoznany znak → BŁĄD ──
             self._konsumuj()
             tokeny.append(Token("ERROR", zn))
 
         return tokeny
 
-    # --- metody stanów automatu ---
-
     def _skanuj_identyfikator(self) -> Token:
-        """Stan IDENTYFIKATOR: litery, cyfry, podkreślenia."""
         bufor = self._konsumuj()
         while self._obecny() is not None and (
             self._obecny().isalnum() or self._obecny() == "_"
@@ -200,16 +143,14 @@ class AutomatSkanera:
         return Token("IDENT", bufor)
 
     def _skanuj_liczbe(self) -> Token:
-        """Stan LICZBA → ewentualnie stan LICZBA_ULAMEK."""
         bufor = self._konsumuj()
         while self._obecny() is not None and self._obecny().isdigit():
             bufor += self._konsumuj()
 
-        # Sprawdzenie części ułamkowej
         if self._obecny() == "." and (
             self._nastepny() is not None and self._nastepny().isdigit()
         ):
-            bufor += self._konsumuj()  # kropka
+            bufor += self._konsumuj()
             while self._obecny() is not None and self._obecny().isdigit():
                 bufor += self._konsumuj()
             return Token("FLOAT", bufor)
@@ -217,52 +158,39 @@ class AutomatSkanera:
         return Token("INT", bufor)
 
     def _skanuj_lancuch(self) -> Token:
-        """Stan LANCUCH: od cudzysłowu do cudzysłowu."""
-        bufor = self._konsumuj()  # otwierający "
+        bufor = self._konsumuj()
         while self._obecny() is not None and self._obecny() != '"':
             if self._obecny() == "\n":
-                break  # łańcuch nie może przechodzić przez nową linię
+                break
             bufor += self._konsumuj()
 
         if self._obecny() == '"':
-            bufor += self._konsumuj()  # zamykający "
-        # Jeśli nie zamknięty, i tak zwracamy to co mamy
+            bufor += self._konsumuj()
         return Token("STRING", bufor)
 
     def _skanuj_komentarz_blokowy(self) -> Token:
-        """Stan KOMENTARZ_BLOKOWY: od /* do */."""
-        bufor = self._konsumuj()  # /
-        bufor += self._konsumuj()  # *
+        bufor = self._konsumuj()
+        bufor += self._konsumuj()
 
         while self.poz < self.dlug:
             if self._obecny() == "*" and self._nastepny() == "/":
-                bufor += self._konsumuj()  # *
-                bufor += self._konsumuj()  # /
+                bufor += self._konsumuj()
+                bufor += self._konsumuj()
                 return Token("COMMENT", bufor)
             bufor += self._konsumuj()
 
-        # Niezamknięty komentarz blokowy
         return Token("COMMENT", bufor)
 
     def _skanuj_operator_porownania(self) -> Token:
-        """Operatory porównania: ==, !=, <=, >=, <, >, ="""
         zn = self._konsumuj()
         if self._obecny() == "=":
             drugi = self._konsumuj()
             return Token("OPERATOR", zn + drugi)
         return Token("OPERATOR", zn)
 
-
-# ============================================================
-#  Generator HTML
-# ============================================================
-
 class GeneratorHTML:
-    """Tworzy dokument HTML z pokolorowanym kodem na podstawie listy tokenów."""
-
     @staticmethod
     def eskejpuj(tekst: str) -> str:
-        """Zamienia znaki specjalne na encje HTML."""
         tekst = tekst.replace("&", "&amp;")
         tekst = tekst.replace("<", "&lt;")
         tekst = tekst.replace(">", "&gt;")
@@ -270,14 +198,12 @@ class GeneratorHTML:
         return tekst
 
     def generuj(self, tokeny: list[Token], tytul: str = "MiniScript") -> str:
-        """Składa pełny dokument HTML."""
         fragmenty_kodu = []
 
         for tk in tokeny:
             tresc_html = self.eskejpuj(tk.tresc)
 
             if tk.typ == "WHITESPACE":
-                # Białe znaki wstawiamy bez spana
                 fragmenty_kodu.append(tresc_html)
             elif tk.typ in KOLORY_CSS:
                 styl = KOLORY_CSS[tk.typ]
@@ -383,21 +309,14 @@ class GeneratorHTML:
 </body>
 </html>"""
 
-
-# ============================================================
-#  Funkcja główna
-# ============================================================
-
 def main():
     if len(sys.argv) < 3:
         print("Użycie: python3 kolorowanie.py <plik_wejściowy> <plik_wyjściowy.html>")
-        print("Przykład: python3 kolorowanie.py przyklad.ms wynik.html")
         sys.exit(1)
 
     sciezka_wejscie = sys.argv[1]
     sciezka_wyjscie = sys.argv[2]
 
-    # Wczytanie pliku źródłowego
     try:
         with open(sciezka_wejscie, "r", encoding="utf-8") as plik:
             kod_zrodlowy = plik.read()
@@ -405,29 +324,15 @@ def main():
         print(f"Błąd: plik '{sciezka_wejscie}' nie istnieje.")
         sys.exit(1)
 
-    # Analiza leksykalna (skanowanie)
     automat = AutomatSkanera(kod_zrodlowy)
     tokeny = automat.skanuj()
 
-    # Wypisanie tokenów na konsolę
-    print(f"Przeskanowano plik: {sciezka_wejscie}")
-    print(f"Znaleziono {len(tokeny)} tokenów:")
-    print("-" * 50)
-    for tk in tokeny:
-        if tk.typ != "WHITESPACE":
-            print(f"  {tk.typ:12s}  │  {tk.tresc!r}")
-    print("-" * 50)
-
-    # Generowanie HTML
     generator = GeneratorHTML()
     nazwa_pliku = sciezka_wejscie.rsplit("/", 1)[-1]
     html = generator.generuj(tokeny, tytul=nazwa_pliku)
 
     with open(sciezka_wyjscie, "w", encoding="utf-8") as plik:
         plik.write(html)
-
-    print(f"Zapisano pokolorowany kod do: {sciezka_wyjscie}")
-
 
 if __name__ == "__main__":
     main()

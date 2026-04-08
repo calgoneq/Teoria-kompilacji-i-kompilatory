@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolorowanie składni – przyklad.ms</title>
+    <style>
+        body {
+            background-color: #282c34;
+            color: #abb2bf;
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+            padding: 24px;
+            margin: 0;
+        }
+        h1 {
+            color: #61afef;
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+        .kod-zrodlowy {
+            background-color: #21252b;
+            border: 1px solid #3e4451;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            tab-size: 4;
+        }
+        .legenda {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: #21252b;
+            border: 1px solid #3e4451;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .legenda-element {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+        .legenda-kolor {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            border: 1px solid #3e4451;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kolorowanie składni &mdash; przyklad.ms</h1>
+    <pre class="kod-zrodlowy"><span style="color: #5c6370; font-style: italic;" title="COMMENT"># Program przykładowy w MiniScript</span>
+<span style="color: #5c6370; font-style: italic;" title="COMMENT"># Demonstruje wszystkie kategorie tokenów</span>
+
+<span style="color: #5c6370; font-style: italic;" title="COMMENT">/* Funkcja obliczająca silnię
+   z wykorzystaniem pętli while */</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">fun</span> <span style="color: #e06c75;" title="IDENT">silnia</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #e06c75;" title="IDENT">n</span><span style="color: #abb2bf;" title="DELIMITER">)</span> <span style="color: #abb2bf;" title="DELIMITER">{</span>
+    <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">wynik</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #d19a66;" title="INT">1</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+    <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">i</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #d19a66;" title="INT">1</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+    <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">while</span> <span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #e06c75;" title="IDENT">i</span> <span style="color: #56b6c2;" title="OPERATOR">&lt;=</span> <span style="color: #e06c75;" title="IDENT">n</span><span style="color: #abb2bf;" title="DELIMITER">)</span> <span style="color: #abb2bf;" title="DELIMITER">{</span>
+        <span style="color: #e06c75;" title="IDENT">wynik</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">wynik</span> <span style="color: #56b6c2;" title="OPERATOR">*</span> <span style="color: #e06c75;" title="IDENT">i</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+        <span style="color: #e06c75;" title="IDENT">i</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">i</span> <span style="color: #56b6c2;" title="OPERATOR">+</span> <span style="color: #d19a66;" title="INT">1</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+    <span style="color: #abb2bf;" title="DELIMITER">}</span>
+    <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">return</span> <span style="color: #e06c75;" title="IDENT">wynik</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #abb2bf;" title="DELIMITER">}</span>
+
+<span style="color: #5c6370; font-style: italic;" title="COMMENT"># Funkcja ze strzałką i warunkami</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">fun</span> <span style="color: #e06c75;" title="IDENT">sprawdz</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #e06c75;" title="IDENT">x</span><span style="color: #abb2bf;" title="DELIMITER">)</span> <span style="color: #56b6c2;" title="ARROW">-&gt;</span> <span style="color: #abb2bf;" title="DELIMITER">{</span>
+    <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">if</span> <span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #e06c75;" title="IDENT">x</span> <span style="color: #56b6c2;" title="OPERATOR">&gt;</span> <span style="color: #d19a66;" title="INT">0</span> <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">and</span> <span style="color: #e06c75;" title="IDENT">x</span> <span style="color: #56b6c2;" title="OPERATOR">!=</span> <span style="color: #d19a66;" title="INT">100</span><span style="color: #abb2bf;" title="DELIMITER">)</span> <span style="color: #abb2bf;" title="DELIMITER">{</span>
+        <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">print</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #98c379;" title="STRING">&quot;Liczba dodatnia&quot;</span><span style="color: #abb2bf;" title="DELIMITER">)</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+        <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">return</span> <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">true</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+    <span style="color: #abb2bf;" title="DELIMITER">}</span> <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">else</span> <span style="color: #abb2bf;" title="DELIMITER">{</span>
+        <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">print</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #98c379;" title="STRING">&quot;Liczba niedodatnia lub równa 100&quot;</span><span style="color: #abb2bf;" title="DELIMITER">)</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+        <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">return</span> <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">false</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+    <span style="color: #abb2bf;" title="DELIMITER">}</span>
+<span style="color: #abb2bf;" title="DELIMITER">}</span>
+
+<span style="color: #5c6370; font-style: italic;" title="COMMENT"># Operacje arytmetyczne</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">a</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #d19a66;" title="INT">42</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">b</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #d19a66;" title="FLOAT">3.14</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">suma</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">a</span> <span style="color: #56b6c2;" title="OPERATOR">+</span> <span style="color: #e06c75;" title="IDENT">b</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">roznica</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">a</span> <span style="color: #56b6c2;" title="OPERATOR">-</span> <span style="color: #e06c75;" title="IDENT">b</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">iloczyn</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">a</span> <span style="color: #56b6c2;" title="OPERATOR">*</span> <span style="color: #e06c75;" title="IDENT">b</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">iloraz</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">a</span> <span style="color: #56b6c2;" title="OPERATOR">/</span> <span style="color: #e06c75;" title="IDENT">b</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">reszta</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">a</span> <span style="color: #56b6c2;" title="OPERATOR">%</span> <span style="color: #d19a66;" title="INT">7</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+
+<span style="color: #5c6370; font-style: italic;" title="COMMENT"># Tablice i pętla for</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">tab</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #abb2bf;" title="DELIMITER">[</span><span style="color: #d19a66;" title="INT">1</span><span style="color: #abb2bf;" title="DELIMITER">,</span> <span style="color: #d19a66;" title="INT">2</span><span style="color: #abb2bf;" title="DELIMITER">,</span> <span style="color: #d19a66;" title="INT">3</span><span style="color: #abb2bf;" title="DELIMITER">,</span> <span style="color: #d19a66;" title="INT">4</span><span style="color: #abb2bf;" title="DELIMITER">,</span> <span style="color: #d19a66;" title="INT">5</span><span style="color: #abb2bf;" title="DELIMITER">]</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">for</span> <span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">j</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #d19a66;" title="INT">0</span><span style="color: #abb2bf;" title="DELIMITER">;</span> <span style="color: #e06c75;" title="IDENT">j</span> <span style="color: #56b6c2;" title="OPERATOR">&lt;</span> <span style="color: #d19a66;" title="INT">5</span><span style="color: #abb2bf;" title="DELIMITER">;</span> <span style="color: #e06c75;" title="IDENT">j</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">j</span> <span style="color: #56b6c2;" title="OPERATOR">+</span> <span style="color: #d19a66;" title="INT">1</span><span style="color: #abb2bf;" title="DELIMITER">)</span> <span style="color: #abb2bf;" title="DELIMITER">{</span>
+    <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">print</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #e06c75;" title="IDENT">tab</span><span style="color: #abb2bf;" title="DELIMITER">[</span><span style="color: #e06c75;" title="IDENT">j</span><span style="color: #abb2bf;" title="DELIMITER">]</span><span style="color: #abb2bf;" title="DELIMITER">)</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #abb2bf;" title="DELIMITER">}</span>
+
+<span style="color: #5c6370; font-style: italic;" title="COMMENT"># Wartości specjalne</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">nic</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">null</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">flaga</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">not</span> <span style="color: #c678dd; font-weight: bold;" title="KEYWORD">false</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+
+<span style="color: #5c6370; font-style: italic;" title="COMMENT">/* Wywołanie funkcji */</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">wynik_silni</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #e06c75;" title="IDENT">silnia</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #d19a66;" title="INT">10</span><span style="color: #abb2bf;" title="DELIMITER">)</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">print</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #e06c75;" title="IDENT">wynik_silni</span><span style="color: #abb2bf;" title="DELIMITER">)</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+<span style="color: #e06c75;" title="IDENT">sprawdz</span><span style="color: #abb2bf;" title="DELIMITER">(</span><span style="color: #e06c75;" title="IDENT">wynik_silni</span><span style="color: #abb2bf;" title="DELIMITER">)</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+
+<span style="color: #5c6370; font-style: italic;" title="COMMENT"># Test: nierozpoznany znak → błąd leksykalny</span>
+<span style="color: #c678dd; font-weight: bold;" title="KEYWORD">let</span> <span style="color: #e06c75;" title="IDENT">test</span> <span style="color: #56b6c2;" title="OPERATOR">=</span> <span style="color: #d19a66;" title="INT">5</span> <span style="color: #ff0000; background: #3e1111;" title="ERROR">@</span> <span style="color: #d19a66;" title="INT">3</span><span style="color: #abb2bf;" title="DELIMITER">;</span>
+</pre>
+    <div class="legenda">
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#c678dd;"></div>
+            Słowo kluczowe
+        </div>
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#e06c75;"></div>
+            Identyfikator
+        </div>
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#d19a66;"></div>
+            Liczba
+        </div>
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#98c379;"></div>
+            Łańcuch znaków
+        </div>
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#5c6370;"></div>
+            Komentarz
+        </div>
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#56b6c2;"></div>
+            Operator
+        </div>
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#abb2bf;"></div>
+            Ogranicznik
+        </div>
+        <div class="legenda-element">
+            <div class="legenda-kolor" style="background:#ff0000;"></div>
+            Błąd
+        </div>
+    </div>
+</body>
+</html>

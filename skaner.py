@@ -9,7 +9,7 @@ class Token:
 
 
 class Skaner:
-    def __init__(self, kod_zlowy):
+    def __init__(self, kod_zrodlowy):
         self.tekst = kod_zrodlowy
         self.dlugosc = len(kod_zrodlowy)
         self.pozycja = 0

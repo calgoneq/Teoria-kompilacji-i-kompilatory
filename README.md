@@ -30,7 +30,7 @@ Skaner zaimplementowany jako automat skończony, generujący plik HTML z pokolor
 Główny projekt przedmiotu: Kompilator proceduralnego języka opisu grafiki wektorowej (**PVG**) do formatu **SVG**.
 
 * **Technologia:** Python 3.x, generator parserów **SLY** (Sly Lex-Yacc).
-* **Status:** W trakcie rozwoju (Etap: Analiza leksykalna/składniowa).
+* **Status:** W trakcie rozwoju (Etap: Implementacja gramatyki i parsera - Temat 7)
 
 ---
 

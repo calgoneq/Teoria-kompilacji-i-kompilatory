@@ -71,12 +71,25 @@ for (let i = 0; i < 5; i = i + 1) {
 
 ---
 
-## 5. Zarys Tokenów i Gramatyki (W trakcie rozwoju)
+## 5. Gramatyka formatu (Notacja EBNF-like)
 
-*Zostanie uzupełnione zgodnie z wymogami prowadzącego w kolejnych etapach.*
+Program w języku PVG składa się z listy instrukcji.
 
-**Planowane Słowa Kluczowe (Tokens):**
-`CANVAS`, `BACKGROUND`, `COLOR`, `CIRCLE`, `RECT`, `LINE`, `DEF`, `FOR`, `WHILE`, `LET`, `IF`, `ELSE`
+```ebnf
+<program>       ::= <statements>
+<statements>    ::= <statement> | <statements> <statement>
+<statement>     ::= <simple_stmt> ";" | <if_stmt> | <for_stmt> | <def_stmt>
 
-**Planowane Operatory i Ograniczniki:**
-`+`, `-`, `*`, `/`, `=`, `==`, `<`, `>`, `{`, `}`, `(`, `)`, `;`, `,`
+<simple_stmt>   ::= "canvas" "(" <expr> "," <expr> ")"
+                  | "background" "(" STRING ")"
+                  | "color" "(" STRING ")"
+                  | "circle" "(" <expr> "," <expr> "," <expr> ")"
+                  | "rect" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
+                  | "let" IDENT "=" <expr>
+                  | IDENT "(" <arguments> ")"
+
+<def_stmt>      ::= "def" IDENT "(" <params> ")" "{" <statements> "}"
+<for_stmt>      ::= "for" "(" <simple_stmt> ";" <expr> ";" <simple_stmt> ")" "{" <statements> "}"
+
+<expr>          ::= <expr> <op> <expr> | "(" <expr> ")" | IDENT | NUMBER
+<op>            ::= "+" | "-" | "*" | "/" | "==" | "!=" | "<" | ">" | "<=" | ">="

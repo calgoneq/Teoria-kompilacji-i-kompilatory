@@ -71,25 +71,29 @@ for (let i = 0; i < 5; i = i + 1) {
 
 ---
 
-## 5. Gramatyka formatu (Notacja EBNF-like)
+## 5. Gramatyka formatu (EBNF)
 
-Program w języku PVG składa się z listy instrukcji.
+Obecna wersja gramatyki wspiera ponad 15 głównych produkcji, umożliwiając tworzenie zaawansowanych algorytmicznie grafik.
 
 ```ebnf
 <program>       ::= <statements>
 <statements>    ::= <statement> | <statements> <statement>
-<statement>     ::= <simple_stmt> ";" | <if_stmt> | <for_stmt> | <def_stmt>
+<statement>     ::= <simple_stmt> ";" | <compound_stmt>
 
-<simple_stmt>   ::= "canvas" "(" <expr> "," <expr> ")"
-                  | "background" "(" STRING ")"
-                  | "color" "(" STRING ")"
-                  | "circle" "(" <expr> "," <expr> "," <expr> ")"
+<simple_stmt>   ::= <canvas_cmd> | <attr_cmd> | <shape_cmd> | <assign_stmt> | <print_stmt> | <call_stmt>
+<compound_stmt> ::= <if_stmt> | <while_stmt> | <for_stmt> | <def_stmt>
+
+<canvas_cmd>    ::= "canvas" "(" <expr> "," <expr> ")"
+<attr_cmd>      ::= "background" "(" STR ")" | "color" "(" STR ")" | "stroke_width" "(" <expr> ")" | "opacity" "(" <expr> ")"
+<shape_cmd>     ::= "circle" "(" <expr> "," <expr> "," <expr> ")"
                   | "rect" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
-                  | "let" IDENT "=" <expr>
-                  | IDENT "(" <arguments> ")"
+                  | "line" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
+                  | "ellipse" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
 
-<def_stmt>      ::= "def" IDENT "(" <params> ")" "{" <statements> "}"
+<if_stmt>       ::= "if" "(" <expr> ")" "{" <statements> "}" [ "else" "{" <statements> "}" ]
+<while_stmt>    ::= "while" "(" <expr> ")" "{" <statements> "}"
 <for_stmt>      ::= "for" "(" <simple_stmt> ";" <expr> ";" <simple_stmt> ")" "{" <statements> "}"
+<def_stmt>      ::= "def" IDENT "(" <params> ")" "{" <statements> "}"
 
-<expr>          ::= <expr> <op> <expr> | "(" <expr> ")" | IDENT | NUMBER
-<op>            ::= "+" | "-" | "*" | "/" | "==" | "!=" | "<" | ">" | "<=" | ">="
+<expr>          ::= <expr> <op> <expr> | <math_func> "(" <expr> ")" | IDENT | NUMBER
+<math_func>     ::= "sin" | "cos" | "sqrt"

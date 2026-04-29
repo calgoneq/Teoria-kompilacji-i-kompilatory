@@ -1,0 +1,19 @@
+canvas(800, 800);
+background("#111111");
+
+def rysuj_gwiazde(cx, cy, promien) {
+    color("#e5c07b");
+    for (let kat = 0; kat < 360; kat = kat + 45) {
+        let end_x = cx + sin(kat) * promien;
+        let end_y = cy + cos(kat) * promien;
+        line(cx, cy, end_x, end_y);
+    }
+}
+
+let max_promien = 200;
+if (max_promien >= 150) {
+    rysuj_gwiazde(400, 400, max_promien);
+} else {
+    color("#ff0000");
+    circle(400, 400, 50);
+}

@@ -1,0 +1,16 @@
+canvas(1000, 1000);
+background("#ffffff");
+color("#000000");
+
+let x = 100;
+let y = 100;
+
+for (let i = 0; i < 5; i = i + 1) {
+    circle(x + (i * 120), y, 50);
+}
+
+let licznik = 0;
+while (licznik < 3) {
+    rect(100, 300 + (licznik * 100), 800, 50);
+    licznik = licznik + 1;
+}

@@ -63,6 +63,9 @@ class PVGParser(Parser):
     @_('LET IDENT "=" expr')
     def simple_statement(self, p): return ('ASSIGN', p.IDENT, p.expr)
 
+    @_('IDENT "=" expr')
+    def simple_statement(self, p): return ('ASSIGN', p.IDENT, p.expr)
+
     @_('PRINT "(" expr ")"')
     def simple_statement(self, p): return ('PRINT', p.expr)
 

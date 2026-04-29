@@ -1,0 +1,8 @@
+canvas(800, 600);
+background("#282c34");
+color("#e06c75");
+stroke_width(5);
+circle(400, 300, 100);
+color("#61afef");
+rect(50, 50, 200, 150);
+line(0, 0, 800, 600);

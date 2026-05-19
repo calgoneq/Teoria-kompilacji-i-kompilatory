@@ -8,6 +8,6 @@ canvas(800, 600);
 
 # Błąd 3: Zła liczba argumentów
 #def test(a, b) {
-    print(a);
-}
-test(5); # Podano tylko 1 argument!
+#    print(a);
+#}
+#test(5); # Podano tylko 1 argument!

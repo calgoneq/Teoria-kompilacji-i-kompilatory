@@ -1,0 +1,25 @@
+canvas(800, 800);
+background("#1a1a2e");
+
+# Drzewo fraktalne zbudowane z linii
+def galaz(x, y, dl, kat) {
+    let x2 = x + sin(kat) * dl;
+    let y2 = y - cos(kat) * dl;
+    
+    stroke_width(dl * 0.1);
+    
+    if (dl > 20) {
+        fill("#8b6914");
+    } else {
+        fill("#98c379");
+    }
+    
+    line(x, y, x2, y2);
+    
+    if (dl > 10) {
+        galaz(x2, y2, dl * 0.7, kat - 30);
+        galaz(x2, y2, dl * 0.7, kat + 30);
+    }
+}
+
+galaz(400, 750, 120, 0);

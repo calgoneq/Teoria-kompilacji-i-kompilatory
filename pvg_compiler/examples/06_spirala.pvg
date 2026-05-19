@@ -1,0 +1,23 @@
+canvas(800, 800);
+background("#0a0a2e");
+
+# Spirala Archimedesa z gradientem kolorow
+stroke_width(2);
+
+for (let i = 0; i < 360; i = i + 5) {
+    let r = i * 0.5;
+    let x = 400 + sin(i) * r;
+    let y = 400 + cos(i) * r;
+    
+    if (i % 30 < 15) {
+        fill("#61afef");
+    } else {
+        fill("#c678dd");
+    }
+    
+    circle(x, y, 3);
+}
+
+# Centrum
+fill("#e5c07b");
+circle(400, 400, 8);

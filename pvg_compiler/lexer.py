@@ -26,6 +26,7 @@ class PVGLexer(Lexer):
     IDENT['canvas']         = CANVAS
     IDENT['background']     = BACKGROUND
     IDENT['fill']           = FILL
+    IDENT['color']          = FILL
     IDENT['stroke']         = STROKE
     IDENT['stroke_width']   = STROKE_WIDTH
     IDENT['opacity']        = OPACITY

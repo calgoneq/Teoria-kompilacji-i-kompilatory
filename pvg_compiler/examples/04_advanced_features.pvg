@@ -1,0 +1,29 @@
+canvas(1000, 800);
+background("#282c34");
+
+# Pokaz tablic i tekstu
+let kolory = ["#e06c75", "#98c379", "#61afef", "#c678dd", "#e5c07b"];
+font_family("Arial");
+font_size(30);
+
+for (let i = 0; i < 5; i = i + 1) {
+    fill(kolory[i]);
+    text(50 + (i * 150), 100, "Gramatyka");
+    
+    # Rysujemy elipsy
+    ellipse(100 + (i * 150), 200, 40, 20);
+}
+
+# Rysowanie wielokąta (Gwiazda ninja) i zaawansowana matematyka
+fill("#e5c07b");
+stroke("#ffffff");
+stroke_width(3);
+translate(500, 500); # Transformacja SVG
+
+for (let kat = 0; kat < 360; kat = kat + 30) {
+    if (kat % 60 == 0) {
+        continue; # Użycie instrukcji continue
+    }
+    rotate(kat);
+    polygon("0,0 20,-50 0,-100 -20,-50");
+}

@@ -1,0 +1,19 @@
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" fill="#282c34" />
+    <text x="50" y="100" font-family="Arial" font-size="30" fill="#e06c75" stroke="none" stroke-width="1" opacity="1.0" transform="">Gramatyka</text>
+    <ellipse cx="100" cy="200" rx="40" ry="20" fill="#e06c75" stroke="none" stroke-width="1" opacity="1.0" transform="" />
+    <text x="200" y="100" font-family="Arial" font-size="30" fill="#98c379" stroke="none" stroke-width="1" opacity="1.0" transform="">Gramatyka</text>
+    <ellipse cx="250" cy="200" rx="40" ry="20" fill="#98c379" stroke="none" stroke-width="1" opacity="1.0" transform="" />
+    <text x="350" y="100" font-family="Arial" font-size="30" fill="#61afef" stroke="none" stroke-width="1" opacity="1.0" transform="">Gramatyka</text>
+    <ellipse cx="400" cy="200" rx="40" ry="20" fill="#61afef" stroke="none" stroke-width="1" opacity="1.0" transform="" />
+    <text x="500" y="100" font-family="Arial" font-size="30" fill="#c678dd" stroke="none" stroke-width="1" opacity="1.0" transform="">Gramatyka</text>
+    <ellipse cx="550" cy="200" rx="40" ry="20" fill="#c678dd" stroke="none" stroke-width="1" opacity="1.0" transform="" />
+    <text x="650" y="100" font-family="Arial" font-size="30" fill="#e5c07b" stroke="none" stroke-width="1" opacity="1.0" transform="">Gramatyka</text>
+    <ellipse cx="700" cy="200" rx="40" ry="20" fill="#e5c07b" stroke="none" stroke-width="1" opacity="1.0" transform="" />
+    <polygon points="0,0 20,-50 0,-100 -20,-50" fill="#e5c07b" stroke="#ffffff" stroke-width="3" opacity="1.0" transform=" translate(500,500) rotate(30)" />
+    <polygon points="0,0 20,-50 0,-100 -20,-50" fill="#e5c07b" stroke="#ffffff" stroke-width="3" opacity="1.0" transform=" translate(500,500) rotate(30) rotate(90)" />
+    <polygon points="0,0 20,-50 0,-100 -20,-50" fill="#e5c07b" stroke="#ffffff" stroke-width="3" opacity="1.0" transform=" translate(500,500) rotate(30) rotate(90) rotate(150)" />
+    <polygon points="0,0 20,-50 0,-100 -20,-50" fill="#e5c07b" stroke="#ffffff" stroke-width="3" opacity="1.0" transform=" translate(500,500) rotate(30) rotate(90) rotate(150) rotate(210)" />
+    <polygon points="0,0 20,-50 0,-100 -20,-50" fill="#e5c07b" stroke="#ffffff" stroke-width="3" opacity="1.0" transform=" translate(500,500) rotate(30) rotate(90) rotate(150) rotate(210) rotate(270)" />
+    <polygon points="0,0 20,-50 0,-100 -20,-50" fill="#e5c07b" stroke="#ffffff" stroke-width="3" opacity="1.0" transform=" translate(500,500) rotate(30) rotate(90) rotate(150) rotate(210) rotate(270) rotate(330)" />
+</svg>

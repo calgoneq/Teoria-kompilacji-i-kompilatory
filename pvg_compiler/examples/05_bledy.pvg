@@ -1,0 +1,13 @@
+canvas(800, 600);
+
+# Błąd 1: Niezdefiniowana zmienna
+#let wynik = 10 + tajemnica;
+
+# Błąd 2: Dzielenie przez zero
+#let z = 100 / 0;
+
+# Błąd 3: Zła liczba argumentów
+#def test(a, b) {
+    print(a);
+}
+test(5); # Podano tylko 1 argument!

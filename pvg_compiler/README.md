@@ -115,8 +115,8 @@ Obecna wersja gramatyki wspiera ponad 15 głównych produkcji, umożliwiając tw
 * **Galeria Przykładów:** Wbudowane, gotowe do uruchomienia programy demonstrujące możliwości języka (pętle, rekurencję, fraktale).
 
 ---
-<img width="1908" height="947" alt="1" src="https://github.com/user-attachments/assets/734e3c0f-13aa-421f-bb32-248b30c113b9" />|<img width="1906" height="945" alt="image" src="https://github.com/user-attachments/assets/abb28a84-aded-473f-b1db-d48434ffa624" />
-<img width="1909" height="940" alt="image" src="https://github.com/user-attachments/assets/8716768d-04a9-4517-b69f-fb07ee3de508" />|<img width="1914" height="946" alt="image" src="https://github.com/user-attachments/assets/e7f33d34-a27e-47e3-a004-93c7f46e159e" />
+<img width="1908" height="947" alt="1" src="https://github.com/user-attachments/assets/734e3c0f-13aa-421f-bb32-248b30c113b9" /><img width="1906" height="945" alt="image" src="https://github.com/user-attachments/assets/abb28a84-aded-473f-b1db-d48434ffa624" />
+<img width="1909" height="940" alt="image" src="https://github.com/user-attachments/assets/8716768d-04a9-4517-b69f-fb07ee3de508" /><img width="1914" height="946" alt="image" src="https://github.com/user-attachments/assets/e7f33d34-a27e-47e3-a004-93c7f46e159e" />
 
 
 

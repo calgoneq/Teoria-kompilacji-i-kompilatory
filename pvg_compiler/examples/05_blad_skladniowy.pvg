@@ -1,0 +1,6 @@
+canvas(800, 600);
+
+# Błąd składniowy: brak średnika na końcu instrukcji prostej
+# (Parser zgłasza nieoczekiwane przejście do kolejnej linii)
+let x = 10
+let y = 20;

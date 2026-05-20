@@ -1,0 +1,5 @@
+canvas(800, 600);
+
+# Błąd leksykalny: użycie niedozwolonego znaku '@'
+# (Lekser nie potrafi przypisać tego znaku do żadnego znanego tokenu)
+let x = @;

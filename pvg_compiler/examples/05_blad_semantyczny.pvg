@@ -1,0 +1,5 @@
+canvas(800, 600);
+
+# Błąd semantyczny: użycie niezdefiniowanej zmiennej 'tajemnica'
+# (Kod jest poprawny składniowo, ale logicznie zmienna nie istnieje w pamięci)
+let wynik = 10 + tajemnica;

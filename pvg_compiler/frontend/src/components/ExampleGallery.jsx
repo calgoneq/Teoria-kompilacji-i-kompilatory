@@ -3,7 +3,9 @@ const EXAMPLE_META = {
   '02_petle_i_zmienne': { icon: '🔄', desc: 'Loops and variables' },
   '03_funkcje_i_matematyka': { icon: '⭐', desc: 'Functions and math (star pattern)' },
   '04_advanced_features': { icon: '🥷', desc: 'Arrays, text, transforms, polygons' },
-  '05_bledy': { icon: '🐛', desc: 'Error handling demo' },
+  '05_blad_leksykalny': { icon: '🔍', desc: 'Błąd leksykalny (niedozwolone znaki)' },
+  '05_blad_skladniowy': { icon: '❌', desc: 'Błąd składniowy (błędna struktura kodu)' },
+  '05_blad_semantyczny': { icon: '🛑', desc: 'Błąd semantyczny (niezdefiniowane zmienne)' },
   '06_spirala': { icon: '🌀', desc: 'Archimedean spiral with colors' },
   '07_fraktale': { icon: '🌲', desc: 'Fractal tree with recursion' },
 }

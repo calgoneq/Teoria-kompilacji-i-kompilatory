@@ -75,30 +75,67 @@ for (let i = 0; i < 5; i = i + 1) {
 
 ## 5. Gramatyka formatu (EBNF)
 
-Obecna wersja gramatyki wspiera ponad 15 głównych produkcji, umożliwiając tworzenie zaawansowanych algorytmicznie grafik.
+Obecna wersja gramatyki wspiera ponad 50 głównych produkcji, umożliwiając tworzenie zaawansowanych algorytmicznie grafik.
 
 ```ebnf
-<program>       ::= <statements>
-<statements>    ::= <statement> | <statements> <statement>
-<statement>     ::= <simple_stmt> ";" | <compound_stmt>
+<program>         ::= <statements>
+<statements>      ::= <statement> | <statements> <statement>
+<statement>       ::= <simple_stmt> ";" | <compound_stmt>
 
-<simple_stmt>   ::= <canvas_cmd> | <attr_cmd> | <shape_cmd> | <assign_stmt> | <print_stmt> | <call_stmt>
-<compound_stmt> ::= <if_stmt> | <while_stmt> | <for_stmt> | <def_stmt>
+<simple_stmt>     ::= <canvas_cmd> | <attr_cmd> | <shape_cmd> | <assign_stmt> | <print_stmt> | <call_stmt> | <flow_cmd>
+<compound_stmt>   ::= <if_stmt> | <while_stmt> | <for_stmt> | <def_stmt>
 
-<canvas_cmd>    ::= "canvas" "(" <expr> "," <expr> ")"
-<attr_cmd>      ::= "background" "(" STR ")" | "color" "(" STR ")" | "stroke_width" "(" <expr> ")" | "opacity" "(" <expr> ")"
-<shape_cmd>     ::= "circle" "(" <expr> "," <expr> "," <expr> ")"
-                  | "rect" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
-                  | "line" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
-                  | "ellipse" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
+<flow_cmd>        ::= "break" | "continue"
+<print_stmt>      ::= "print" "(" <expr> ")"
+<assign_stmt>     ::= "let" IDENT "=" <expr>
+                    | IDENT "=" <expr>
+                    | "let" IDENT "=" "[" <array_items> "]"
+                    | IDENT "[" <expr> "]" "=" <expr>
+<call_stmt>       ::= IDENT "(" <args> ")"
 
-<if_stmt>       ::= "if" "(" <expr> ")" "{" <statements> "}" [ "else" "{" <statements> "}" ]
-<while_stmt>    ::= "while" "(" <expr> ")" "{" <statements> "}"
-<for_stmt>      ::= "for" "(" <simple_stmt> ";" <expr> ";" <simple_stmt> ")" "{" <statements> "}"
-<def_stmt>      ::= "def" IDENT "(" <params> ")" "{" <statements> "}"
+<canvas_cmd>      ::= "canvas" "(" <expr> "," <expr> ")"
+<attr_cmd>        ::= "background" "(" <expr> ")"
+                    | "fill" "(" <expr> ")"
+                    | "color" "(" <expr> ")"
+                    | "stroke" "(" <expr> ")"
+                    | "stroke_width" "(" <expr> ")"
+                    | "opacity" "(" <expr> ")"
+                    | "font_size" "(" <expr> ")"
+                    | "font_family" "(" <expr> ")"
+                    | "rotate" "(" <expr> ")"
+                    | "translate" "(" <expr> "," <expr> ")"
+                    | "scale" "(" <expr> "," <expr> ")"
 
-<expr>          ::= <expr> <op> <expr> | <math_func> "(" <expr> ")" | IDENT | NUMBER
-<math_func>     ::= "sin" | "cos" | "sqrt"
+<shape_cmd>       ::= "circle" "(" <expr> "," <expr> "," <expr> ")"
+                    | "rect" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
+                    | "line" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
+                    | "ellipse" "(" <expr> "," <expr> "," <expr> "," <expr> ")"
+                    | "polygon" "(" <expr> ")"
+                    | "polyline" "(" <expr> ")"
+                    | "path" "(" <expr> ")"
+                    | "text" "(" <expr> "," <expr> "," <expr> ")"
+
+<if_stmt>         ::= "if" "(" <expr> ")" "{" <statements> "}" [ "else" "{" <statements> "}" ]
+<while_stmt>      ::= "while" "(" <expr> ")" "{" <statements> "}"
+<for_stmt>        ::= "for" "(" <simple_stmt> ";" <expr> ";" <simple_stmt> ")" "{" <statements> "}"
+<def_stmt>        ::= "def" IDENT "(" <params> ")" "{" <statements> "}"
+
+<expr>            ::= <expr> <op> <expr>
+                    | "not" <expr>
+                    | "-" <expr>
+                    | "(" <expr> ")"
+                    | IDENT
+                    | IDENT "[" <expr> "]"
+                    | NUMBER
+                    | STR
+                    | <math_func> "(" <expr> ")"
+
+<op>              ::= "+" | "-" | "*" | "/" | "%" | "==" | "!=" | "<" | ">" | "<=" | ">=" | "and" | "or"
+<math_func>       ::= "sin" | "cos" | "tan" | "sqrt" | "log" | "exp" | "abs" | "round" | "ceil" | "floor"
+
+<array_items>     ::= <array_items> "," <expr> | <expr> | empty
+<params>          ::= <params> "," IDENT | IDENT | empty
+<args>            ::= <args> "," <expr> | <expr> | empty
 ```
 
 ---
